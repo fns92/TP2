@@ -84,7 +84,6 @@ public class Polinomios {
 	}
 	
 	
-	
 	public double evaluarProgDinamica(double x){
 		
 		double resultado = 0;
@@ -96,6 +95,47 @@ public class Polinomios {
 			resultado += coeficientes[i] * potencias[i];
 		}
 		return resultado;
+		
+	}
+	
+	
+	public double evaluarMejorada(double x){
+		
+		double resultado = 0;
+		double potenciaAnterior = 1;
+		resultado += coeficientes[this.grado];
+		for (int i = this.grado - 1 ; i >= 0 ; i--) {
+			potenciaAnterior *= x;
+			resultado += coeficientes[i] * potenciaAnterior;
+		}
+		return resultado;
+		
+	}
+	
+	
+	public double evaluarPow(double x){
+		
+		double resultado = 0;
+		for(int i = 0 ; i <= this.grado ; i++){
+			
+			resultado += this.coeficientes[i] * Math.pow(x, this.grado - i);
+			
+		}
+		return resultado;
+	}
+	
+	
+	public double evaluarHorner(double x){
+		
+		double resultado = 0;
+		
+	for(int i = 0 ; i <= this.grado ; i++){
+		
+		resultado = (resultado * x) + this.coeficientes[i];
+		
+	}
+	
+	return resultado;
 		
 	}
 

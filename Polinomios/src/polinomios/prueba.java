@@ -8,7 +8,7 @@ public class prueba {
 		
 		Polinomios polinomio = new Polinomios(2,vector);
 		
-		System.out.println(polinomio.evaluarRecursivaPar(0));
+		System.out.println(polinomio.evaluarHorner(0));
 
 	}
 
