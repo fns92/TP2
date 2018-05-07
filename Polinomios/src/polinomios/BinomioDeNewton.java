@@ -4,7 +4,7 @@ class BinomioDeNewton {
 	private double lineal;
 	private double indepte;
 	private int grado;
-	private int []coeficientes;
+	private double []coeficientes;
 	
 	public BinomioDeNewton(double lineal, double indepte, int grado) {
 		
@@ -37,6 +37,49 @@ class BinomioDeNewton {
         return resultado;
     }
 	
+	public void obtenerTodosLosCoeficientes() {
+		
+		for(int i = 0; i < grado; i++) {
+			
+			int k = 1;
+			this.coeficientes[i] = this.obtenerCoeficiente(k);
+			k++;
+		}
+	}
 	
-
+	public double resolverBinomio(double valorX) {
+		
+		this.obtenerTodosLosCoeficientes();
+		double resTotal = 0;
+		if (grado == 0)
+			return 1;
+		if (lineal > 0 && indepte < 0) {
+			for (int i = 0; i <= grado; i++){
+				if(i%2 == 0)
+					resTotal += coeficientes[i] * (Math.pow(lineal * valorX, grado)) * (Math.pow(indepte,grado - i));
+				else
+					resTotal -= coeficientes[i] * (Math.pow(lineal * valorX, grado)) * (Math.pow(indepte, grado - i))*(-1);
+			}
+			return resTotal;
+		}
+		
+		if (lineal < 0 && indepte < 0) {
+			for (int i = 0; i <= grado; i++){
+				resTotal -= coeficientes[i] * (Math.pow(lineal * valorX, i)) * (Math.pow(indepte, grado - i))*-1;
+			}
+			return resTotal;
+		}
+		if (lineal < 0 && indepte > 0) {
+			for (int i = 0; i <= grado; i++)
+				if(i%2 == 0)
+					resTotal -= coeficientes[i] * (Math.pow(lineal * valorX, i)) * (Math.pow(indepte, grado - i))*(-1);
+				else
+					resTotal += coeficientes[i] * (Math.pow(lineal * valorX, i)) * (Math.pow(indepte, grado - i));
+			return resTotal;
+		}
+		for (int i = 0; i <= grado; i++)
+			resTotal += coeficientes[i] * (Math.pow(lineal * valorX, grado - i)) * (Math.pow(indepte, i));
+		return resTotal;
+	}
+	
 }
