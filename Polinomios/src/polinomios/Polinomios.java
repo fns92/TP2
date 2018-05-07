@@ -87,16 +87,14 @@ public class Polinomios {
 	
 	public double evaluarProgDinamica(double x){
 		
-		int potencia=1,resultado=0;
-		
-		for(int j = 0 ; j <= this.grado ; j++){
-			potencia *= x;
+		double resultado = 0;
+		double[] potencias = new double[this.grado+1];
+		potencias[this.grado] = 1;
+		resultado += coeficientes[this.grado];
+		for (int i = this.grado - 1 ; i >= 0 ; i--) {
+			potencias[i] = x * potencias[i + 1];
+			resultado += coeficientes[i] * potencias[i];
 		}
-		
-		for(int i = 0 ; i <= this.grado ; i++){
-			resultado += ((potencia /= x)*this.coeficientes[i]);
-		}
-		
 		return resultado;
 		
 	}
